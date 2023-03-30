@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Game Page{% endblock %}
+
+{% block content %}
+<h1>Let's Boggle</h1>
+
+<table id="game-board">
+    <tbody>
+        {% for lst in board %}
+        <tr>
+            {% for letter in lst %}
+            <td id="{{letter}}">{{letter}}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div id="words-container">
+    <ul id="guessed-words"></ul>
+</div>
+
+<form action="" method="POST">
+    <button id="check-word-button">Check Word</button>
+</form>
+
+{% endblock %}
