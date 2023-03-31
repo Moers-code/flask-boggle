@@ -9,11 +9,15 @@ app.config['SECRET_KEY'] = 'S$cr3t12K3y'
 
 toolbar = DebugToolbarExtension(app)
 
+@app.route('/')
+def home_page():
+    return render_template('home.html')
 
 @app.route('/start')
 def play_game():
     board = boggle_game.make_board()
     session["board"] = board
+    session['score'] = 0
     return render_template('game.html', board = board)
 
 @app.route('/guess', methods = ["POST"])
@@ -35,4 +39,14 @@ def process_guess():
             return jsonify({"result": "not-a-word"})
     else:
         return jsonify({"result": "Not a Valid Word"})
-    
+
+@app.route('/update_score', methods = ["POST"])
+def update_score():
+    score = request.json.get('score', 0)
+    session["score"] = score
+    return jsonify({"result":"Score Saved"})  
+
+@app.route('/score')
+def final_score():
+    score = session["score"]
+    return render_template('score.html', score=score)
