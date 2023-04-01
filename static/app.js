@@ -48,7 +48,7 @@ const handleForm = async (e) => {
 
 
 const startGame = () => {
-    let timeLeft = 20
+    let timeLeft = 15
     let gameTimer = setInterval(async() => {
         timeLeft--;
         $("#timer").text(timeLeft);
