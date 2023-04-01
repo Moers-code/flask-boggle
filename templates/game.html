@@ -10,7 +10,7 @@
         {% for lst in board %}
         <tr>
             {% for letter in lst %}
-            <td id="{{letter}}">{{letter}}</td>
+            <td class="{{letter}}">{{letter}}</td>
             {% endfor %}
         </tr>
         {% endfor %}
@@ -23,7 +23,7 @@
     <ul id="guessed-words"></ul>
 </div>
 
-<form action="" method="POST">
+<form action="" method="">
     <button id="check-word-button">Check Word</button>
 </form>
 

@@ -15,12 +15,16 @@ const serverRequest = async () => {
     }
 }
 
-// UI: Displays Score
-const displayScore = () => {
+const calcScore = () => {
     score = 0;
     for(str of wordSet){
-        score += str.length
+        score += str.length;
     }
+}
+
+// UI: Displays Score
+const displayScore = () => {
+    calcScore();
     $("#score").text(score)
 }
 
@@ -40,7 +44,6 @@ const handleForm = async (e) => {
     if(result === "ok"){
         wordSet.add(word)
     }  
-    
     displayWords();
     displayScore();
     word = '';
@@ -65,7 +68,7 @@ const startGame = () => {
     }, 1000)
 
     $('td').on('click', (e) => {
-        word += $(e.target).attr("id");
+        word += $(e.target).attr("class");
     })
     
     $("#check-word-button").on('click', handleForm);
