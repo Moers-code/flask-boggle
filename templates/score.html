@@ -4,6 +4,12 @@
 
 {% block content %}
     <h2>YOUR SCORE</h2>
-    <h3 id="final-score">{{score}}</h3>
-    <button id="restart-game">Restart Game</button>
+    <h3 id="final-score">{{ score }}</h3>
+    <h2>High Score</h2>
+    <h3 id="high-score">{{ high_score }}</h3>
+    <h2>You played</h2>
+    <h3>{{ times_played }}</h3>
+    <form action='/start'>
+        <button id="restart-game">Restart Game</button>
+    </form>
 {% endblock %}

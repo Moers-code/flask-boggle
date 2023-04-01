@@ -13,7 +13,7 @@ toolbar = DebugToolbarExtension(app)
 def home_page():
     return render_template('home.html')
 
-@app.route('/start')
+@app.route('/start/')
 def play_game():
     board = boggle_game.make_board()
     session["board"] = board
@@ -49,4 +49,12 @@ def update_score():
 @app.route('/score')
 def final_score():
     score = session["score"]
-    return render_template('score.html', score=score)
+    high_score = session["high_score"]
+    session["times_played"] += 1
+    times_played = session["times_played"]
+    high_score = max(score, high_score)
+
+    session['score'] = score
+    session["high_score"] = high_score
+    
+    return render_template('score.html', score=score, high_score = high_score, times_played = times_played)
