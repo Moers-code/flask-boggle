@@ -54,7 +54,7 @@ class Game{
 
     startGame = () => {
         console.log("startGame() called");
-        let timeLeft = 15
+        let timeLeft = 150
         let gameTimer = setInterval(async() => {
             timeLeft--;
             $("#timer").text(timeLeft);
@@ -79,7 +79,7 @@ class Game{
 
 $(document).ready(function() {
     if (window.location.href === BASE_URL) {
-      // if the endpoint is loaded start game & timer
+      // if the url for /play_game is loaded, start game & timer
         const newBoggle = new Game();
         newBoggle.startGame();
     }

@@ -3,13 +3,21 @@
 {% block title %}Score{% endblock %}
 
 {% block content %}
-    <h2>YOUR SCORE</h2>
-    <h3 id="final-score">{{ score }}</h3>
-    <h2>High Score</h2>
-    <h3 id="high-score">{{ high_score }}</h3>
-    <h2>You played</h2>
-    <h3>{{ times_played }}</h3>
-    <form action='/play_game'>
+    <div id="stats-container">
+        <div class="stats">
+            <h2>YOUR SCORE</h2>
+            <p id="final-score">{{ score }}</p>
+        </div>
+        <div class="stats">
+            <h2>High Score</h2>
+            <p id="high-score">{{ high_score }}</p>
+        </div>
+        <div class="stats">
+            <h2>You played</h2>
+            <p>{{ times_played }} Times</p>
+        </div>
+    </div>
+    <form action='/play_game' id="restart-form">
         <button id="restart-game">Restart Game</button>
     </form>
 {% endblock %}
