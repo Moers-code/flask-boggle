@@ -3,28 +3,38 @@
 {% block title %}Game Page{% endblock %}
 
 {% block content %}
-<h1>Let's Boggle</h1>
+<h1 id='game-title'>Let's Boggle</h1>
 <h3 id="timer"></h3>
-<table id="game-board">
-    <tbody>
-        {% for lst in board %}
-        <tr>
-            {% for letter in lst %}
-            <td class="{{letter}}">{{letter}}</td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
-<div id="words-container">
+<div id='score-div'>
     <h4 id="score-title">Score</h4>
     <p id="score">0</p>
-    <ul id="guessed-words"></ul>
 </div>
 
-<form action="/guess" method="POST" id='guess-form'>
-    <button id="check-word-button">Check Word</button>
-</form>
+<div id='game-console'>
 
+    <div id="words-container">
+       
+        <ul id="guessed-words"></ul>
+    </div>
+
+    <table id="game-board">
+        <tbody>
+            {% for lst in board %}
+            <tr>
+                {% for letter in lst %}
+                <td class="{{letter}}">{{letter}}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <form action="/guess" method="POST" id='guess-form'>
+        <button id="check-word-button">Check Word</button>
+    </form>
+    
+</div>
+<form action='/play_game' id="restart-game-form">
+    <button id="restart-game-button">Restart Game</button>
+</form>
 {% endblock %}

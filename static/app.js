@@ -9,6 +9,7 @@ class Game{
 
     // Make calls to server to validate word
     serverRequest = async () => {
+        if (this.word === '' || this.word === null || this.word.length < 2) return;
         let data = {playerGuess: this.word}
         try {
             const res = await axios.post('/guess', data);
@@ -30,7 +31,6 @@ class Game{
         this.calcScore();
         $("#score").text(this.score)
     }
-
     // UI: Displays Score
     displayWords = () =>{
         $("ul").empty();
@@ -49,12 +49,13 @@ class Game{
         }  
         this.displayWords();
         this.displayScore();
+        $('td').removeClass('clicked');
         this.word = '';
     }
 
     startGame = () => {
-        console.log("startGame() called");
-        let timeLeft = 150
+    
+        let timeLeft = 60
         let gameTimer = setInterval(async() => {
             timeLeft--;
             $("#timer").text(timeLeft);
@@ -68,12 +69,15 @@ class Game{
                 }
             }
         }, 1000)
-    
+        
+        // Event Listener for Letters Choice
         $('td').on('click', (e) => {
             this.word += $(e.target).attr("class");
-        })
-        
-        $("#guess-form").on('submit', this.handleForm);
+            $(e.target).toggleClass('clicked');
+        }) 
+
+        // Event Listener for Word Validation
+        $("#guess-form").on('submit', this.handleForm);   
     }
 }
 
