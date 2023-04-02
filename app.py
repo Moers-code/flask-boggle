@@ -1,11 +1,12 @@
 from boggle import Boggle
-from flask import Flask, request, render_template, session, jsonify
+from flask import Flask, request, render_template, session, jsonify, redirect
 from flask_debugtoolbar import DebugToolbarExtension
 
 boggle_game = Boggle()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'S$cr3t12K3y'
+app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 toolbar = DebugToolbarExtension(app)
 
@@ -17,7 +18,7 @@ def home_page():
     return render_template('home.html')
 
 
-@app.route('/start/')
+@app.route('/play_game/')
 def play_game():
     """Renders the Game Board Page"""
 
@@ -25,10 +26,11 @@ def play_game():
     board = boggle_game.make_board()
     session["board"] = board
     session['score'] = 0
+    
     return render_template('game.html', board = board)
 
 
-@app.route('/guess', methods = ["POST"])
+@app.route('/guess/', methods = ["POST"])
 def process_guess():
     """Processes and Validates User's Guess and Returns JSON"""
 
@@ -49,7 +51,7 @@ def process_guess():
         return jsonify({"result": "Not a Valid Word"})
 
 
-@app.route('/update_score', methods = ["POST"])
+@app.route('/update_score/', methods = ["POST"])
 def update_score():
     """Updates Score at the End of the Game"""
 
@@ -58,7 +60,7 @@ def update_score():
     return jsonify({"result":"Score Saved"})  
 
 
-@app.route('/score')
+@app.route('/score/')
 def final_score():
     """Renders the Score Page with User's Statistics"""
 

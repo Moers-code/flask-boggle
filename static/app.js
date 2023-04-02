@@ -1,3 +1,5 @@
+const BASE_URL = "http://127.0.0.1:5000/play_game/"
+
 class Game{
     constructor(){
         this.word = '';
@@ -51,6 +53,7 @@ class Game{
     }
 
     startGame = () => {
+        console.log("startGame() called");
         let timeLeft = 15
         let gameTimer = setInterval(async() => {
             timeLeft--;
@@ -70,21 +73,14 @@ class Game{
             this.word += $(e.target).attr("class");
         })
         
-        $("#check-word-button").on('click', this.handleForm);
+        $("#guess-form").on('submit', this.handleForm);
     }
-
 }
 
-
-
-
-
-
-
-
-
-const newBoggle = new Game();
-newBoggle.startGame();
-
-
-
+$(document).ready(function() {
+    if (window.location.href === BASE_URL) {
+      // if the endpoint is loaded start game & timer
+        const newBoggle = new Game();
+        newBoggle.startGame();
+    }
+  });
