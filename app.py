@@ -18,7 +18,7 @@ def home_page():
     return render_template('home.html')
 
 
-@app.route('/play_game/')
+@app.route('/play_game', strict_slashes = False)
 def play_game():
     """Renders the Game Board Page"""
 
@@ -30,7 +30,7 @@ def play_game():
     return render_template('game.html', board = board)
 
 
-@app.route('/guess/', methods = ["POST"])
+@app.route('/guess', methods = ["POST"], strict_slashes = False)
 def process_guess():
     """Processes and Validates User's Guess and Returns JSON"""
 
@@ -51,7 +51,7 @@ def process_guess():
         return jsonify({"result": "Not a Valid Word"})
 
 
-@app.route('/update_score/', methods = ["POST"])
+@app.route('/update_score', methods = ["POST"], strict_slashes = False)
 def update_score():
     """Updates Score at the End of the Game"""
 
@@ -60,7 +60,7 @@ def update_score():
     return jsonify({"result":"Score Saved"})  
 
 
-@app.route('/score/')
+@app.route('/score', strict_slashes = False)
 def final_score():
     """Renders the Score Page with User's Statistics"""
 
@@ -72,3 +72,5 @@ def final_score():
     high_score = session["high_score"]
     
     return render_template('score.html', score=score, high_score = high_score, times_played = times_played)
+
+
